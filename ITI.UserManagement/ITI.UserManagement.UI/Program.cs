@@ -7,8 +7,13 @@ namespace ITI.UserManagement.UI
         static void Main(string[] args)
         {
             User john = new User();
+            john.UserName = "John";
+
+            string userName = john.UserName;
+            Console.WriteLine(userName);
+
             john.SetPassword("ERTERTER");
-            if (john.PasswordMatch("spidof"))
+            if (john.PasswordMatch("ERTERTER"))
             {
                 Console.WriteLine("Success!");
             }
