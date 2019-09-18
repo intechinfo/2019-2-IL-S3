@@ -5,6 +5,11 @@
         string _userName;
         string _password;
 
+        public User(string userName)
+        {
+            _userName = userName;
+        }
+
         public string UserName
         {
             get { return _userName; }

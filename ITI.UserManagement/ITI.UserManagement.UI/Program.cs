@@ -6,8 +6,9 @@ namespace ITI.UserManagement.UI
     {
         static void Main(string[] args)
         {
-            User john = new User();
-            john.UserName = "John";
+            User john = new User("John");
+
+            john.UserName = "Johny";
 
             string userName = john.UserName;
             Console.WriteLine(userName);
