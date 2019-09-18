@@ -1,4 +1,6 @@
-﻿namespace ITI.Bottle.UI
+﻿using System;
+
+namespace ITI.Bottle.UI
 {
     class Flask
     {
@@ -13,6 +15,12 @@
         public Flask(ushort maxCapacity)
         {
             _maxCapacity = maxCapacity;
+        }
+
+        public void Fill(ushort volumeToAdd)
+        {
+            _currentVolume += volumeToAdd;
+            if (_currentVolume > _maxCapacity) _currentVolume = _maxCapacity;
         }
     }
 }
