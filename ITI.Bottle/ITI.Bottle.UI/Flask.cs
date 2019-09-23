@@ -1,4 +1,6 @@
-﻿namespace ITI.Bottle.UI
+﻿using System;
+
+namespace ITI.Bottle.UI
 {
     class Flask
     {
@@ -37,14 +39,27 @@
             _currentVolume = 0;
         }
 
-        public ushort GetCurrentVolume()
+        public ushort Volume
         {
-            return _currentVolume;
+            get { return _currentVolume; }
+            private set { _currentVolume = Math.Min(_maxCapacity, value); }
         }
 
-        public ushort GetMaxCapacity()
+        public ushort MaxCapacity
         {
-            return _maxCapacity;
+            get { return _maxCapacity; }
+        }
+
+        public bool IsEmpty
+        {
+            get { return _currentVolume == 0; }
+        }
+
+        // public bool IsEmpty => _currentVolume == 0;
+
+        public bool IsFull
+        {
+            get { return _maxCapacity == _currentVolume; }
         }
     }
 }

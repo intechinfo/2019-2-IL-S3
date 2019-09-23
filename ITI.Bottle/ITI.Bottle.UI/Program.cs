@@ -30,7 +30,13 @@ namespace ITI.Bottle.UI
 
         static void ShowFlask(Flask flask)
         {
-            Console.WriteLine("Max capacity: {0}, current volume: {1}.", flask.GetMaxCapacity(), flask.GetCurrentVolume());
+            ushort volume = flask.Volume;
+            Console.WriteLine(
+                "Max capacity: {0}, current volume: {1}, is empty: {2}, is full: {3}",
+                flask.MaxCapacity,
+                volume,
+                flask.IsEmpty,
+                flask.IsFull);
         }
     }
 }
