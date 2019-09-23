@@ -14,6 +14,8 @@ namespace ITI.UserManagement.UI
             Console.WriteLine(userName);
 
             john.SetPassword("ERTERTER");
+            User.SetPassword(john, "ERTERTER");
+
             if (john.PasswordMatch("ERTERTER"))
             {
                 Console.WriteLine("Success!");

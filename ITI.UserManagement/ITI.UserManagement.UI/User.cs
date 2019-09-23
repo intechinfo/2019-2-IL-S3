@@ -2,28 +2,33 @@
 {
     class User
     {
-        string _userName;
-        string _password;
+        string userName;
+        string password;
 
         public User(string userName)
         {
-            _userName = userName;
+            this.userName = userName;
         }
 
         public string UserName
         {
-            get { return _userName; }
-            set { _userName = value; }
+            get { return userName; }
+            set { userName = value; }
         }
 
         public void SetPassword(string password)
         {
-            _password = password;
+            this.password = password;
+        }
+
+        public static void SetPassword(User @this, string password)
+        {
+            @this.password = password;
         }
 
         public bool PasswordMatch(string candidate)
         {
-            return _password == candidate;
+            return password == candidate;
         }
     }
 }
