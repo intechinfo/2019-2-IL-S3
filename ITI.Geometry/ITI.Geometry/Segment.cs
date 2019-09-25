@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System;
 
 namespace ITI.Geometry
 {
-    class Segment
+    public class Segment
     {
         readonly int _length;
         int _position;

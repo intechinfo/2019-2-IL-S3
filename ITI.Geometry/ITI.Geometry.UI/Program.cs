@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace ITI.Geometry
+namespace ITI.Geometry.UI
 {
     class Program
     {
