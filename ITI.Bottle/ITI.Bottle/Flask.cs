@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace ITI.Bottle.UI
+namespace ITI.Bottle
 {
-    class Flask
+    public class Flask
     {
-        ushort _maxCapacity;
+        readonly ushort _maxCapacity;
         ushort _currentVolume;
 
         public Flask()
@@ -19,8 +19,8 @@ namespace ITI.Bottle.UI
 
         public void Fill(ushort volumeToAdd)
         {
+            if (_currentVolume + volumeToAdd > _maxCapacity) throw new InvalidOperationException("The volume to add is too big.");
             _currentVolume += volumeToAdd;
-            if (_currentVolume > _maxCapacity) _currentVolume = _maxCapacity;
         }
 
         public void Fulfill()
@@ -30,8 +30,8 @@ namespace ITI.Bottle.UI
 
         public void Empty(ushort volumeToRemove)
         {
-            if (volumeToRemove > _currentVolume) _currentVolume = 0;
-            else _currentVolume -= volumeToRemove;
+            if (volumeToRemove > _currentVolume) throw new InvalidOperationException("The volume to remove is too big.");
+            _currentVolume -= volumeToRemove;
         }
 
         public void Empty()
