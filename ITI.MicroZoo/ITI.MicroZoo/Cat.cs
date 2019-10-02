@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ITI.MicroZoo
 {
@@ -59,6 +60,14 @@ namespace ITI.MicroZoo
 
         internal void Update()
         {
+            //Bird[] birds = _context.Birds;
+            //double minDistance = double.MaxValue;
+            //foreach (Bird bird in birds)
+            //{
+            //    double distance = _position ?? bird.Position;
+            //    if (distance < minDistance) minDistance = distance;
+            //}
+
             throw new NotImplementedException();
         }
     }

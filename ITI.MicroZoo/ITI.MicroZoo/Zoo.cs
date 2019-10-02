@@ -89,5 +89,21 @@ namespace ITI.MicroZoo
         {
             return _random.NextDouble() * (max - min) + min;
         }
+
+        internal Bird[] Birds
+        {
+            get
+            {
+                Bird[] birds = new Bird[_birds.Count];
+                int i = 0;
+                foreach (Bird bird in _birds.Values)
+                {
+                    birds[i] = bird;
+                    i++;
+                }
+
+                return birds;
+            }
+        }
     }
 }
