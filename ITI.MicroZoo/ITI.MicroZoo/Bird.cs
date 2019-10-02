@@ -17,6 +17,7 @@
         public string Name
         {
             get { return _name; }
+            set { throw new System.NotImplementedException(); }
         }
     }
 }

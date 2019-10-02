@@ -24,12 +24,18 @@ namespace ITI.MicroZoo
             return bird;
         }
 
+        internal void OnRename(Cat cat, string newName)
+        {
+            _cats.Remove(cat.Name);
+            _cats.Add(newName, cat);
+        }
+
         public Cat CreateCat(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("The name must be not null nor whitespace.", nameof(name));
             if (_cats.ContainsKey(name)) throw new ArgumentException("A cat with this name already exists.", nameof(name));
 
-            Cat cat = new Cat(name);
+            Cat cat = new Cat(this, name);
             _cats.Add(name, cat);
             return cat;
         }
