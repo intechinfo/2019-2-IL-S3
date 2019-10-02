@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace ITI.MicroZoo.Tests
 {
@@ -37,6 +38,39 @@ namespace ITI.MicroZoo.Tests
 
             Assert.That(b2.Name, Is.EqualTo("Bird-2"));
             Assert.That(b2, Is.SameAs(bird2));
+        }
+
+        [TestCase("")]
+        [TestCase("     ")]
+        [TestCase(null)]
+        public void create_animal_with_invalid_name_throws_ArgumentException(string name)
+        {
+            Zoo sut = new Zoo();
+            Assert.Throws<ArgumentException>(() => sut.CreateBird(name));
+            Assert.Throws<ArgumentException>(() => sut.CreateCat(name));
+        }
+
+        [Test]
+        public void create_2_animals_with_same_name_throws_ArgumentException()
+        {
+            Zoo sut = new Zoo();
+            sut.CreateBird("name");
+            sut.CreateCat("name");
+
+            Assert.Throws<ArgumentException>(() => sut.CreateBird("name"));
+            Assert.Throws<ArgumentException>(() => sut.CreateCat("name"));
+        }
+
+        [Test]
+        public void find_animal_returns_null_with_unknown_name()
+        {
+            Zoo sut = new Zoo();
+
+            Cat cat = sut.FindCat("name");
+            Bird bird = sut.FindBird("name");
+
+            Assert.That(cat, Is.Null);
+            Assert.That(bird, Is.Null);
         }
     }
 }
