@@ -48,6 +48,12 @@ namespace ITI.MicroZoo
             return cat;
         }
 
+        public void Update()
+        {
+            foreach (Cat cat in _cats.Values) cat.Update();
+            foreach (Bird bird in _birds.Values) bird.Update();
+        }
+
         internal void OnRename(Cat cat, string newName)
         {
             if (_cats.ContainsKey(newName)) throw new ArgumentException("A cat with this name already exists.", nameof(newName));

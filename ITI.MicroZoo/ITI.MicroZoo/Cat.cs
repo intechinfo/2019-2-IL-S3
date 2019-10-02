@@ -56,5 +56,10 @@ namespace ITI.MicroZoo
         {
             get { return _position.Y; }
         }
+
+        internal void Update()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
