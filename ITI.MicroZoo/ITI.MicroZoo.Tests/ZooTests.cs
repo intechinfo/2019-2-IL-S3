@@ -39,9 +39,13 @@ namespace ITI.MicroZoo.Tests
 
             Assert.That(b1.Name, Is.EqualTo("Bird-1"));
             Assert.That(b1, Is.SameAs(bird1));
+            Assert.That(b1.Zoo, Is.SameAs(sut));
+            Assert.That(b1.IsAlive, Is.True);
 
             Assert.That(b2.Name, Is.EqualTo("Bird-2"));
             Assert.That(b2, Is.SameAs(bird2));
+            Assert.That(b2.Zoo, Is.SameAs(sut));
+            Assert.That(b2.IsAlive, Is.True);
         }
 
         [TestCase("")]

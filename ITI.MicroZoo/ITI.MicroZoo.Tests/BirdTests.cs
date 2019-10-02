@@ -22,5 +22,21 @@ namespace ITI.MicroZoo.Tests
             Assert.That(b2, Is.Null);
             Assert.That(sut.Name, Is.EqualTo("new-name"));
         }
+
+        [Test]
+        public void kill_bird()
+        {
+            Zoo zoo = new Zoo();
+            Bird sut = zoo.CreateBird("name");
+
+            sut.Kill();
+
+            Assert.That(sut.IsAlive, Is.False);
+            Assert.That(zoo.FindBird("name"), Is.Null);
+            Bird b = zoo.CreateBird("name");
+            Assert.That(b, Is.Not.SameAs(sut));
+            Assert.That(sut.Zoo, Is.Null);
+            Assert.Throws<InvalidOperationException>(() => sut.Kill());
+        }
     }
 }

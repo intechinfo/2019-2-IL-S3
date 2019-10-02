@@ -29,5 +29,20 @@ namespace ITI.MicroZoo
                 _name = value;
             }
         }
+
+        public bool IsAlive
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public void Kill()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Zoo Zoo
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }
