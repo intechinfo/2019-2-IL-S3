@@ -19,15 +19,9 @@ namespace ITI.MicroZoo
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("The name must be not null nor whitespace.", nameof(name));
             if (_birds.ContainsKey(name)) throw new ArgumentException("A bird with this name already exists.", nameof(name));
 
-            Bird bird = new Bird(name);
+            Bird bird = new Bird(this, name);
             _birds.Add(name, bird);
             return bird;
-        }
-
-        internal void OnRename(Cat cat, string newName)
-        {
-            _cats.Remove(cat.Name);
-            _cats.Add(newName, cat);
         }
 
         public Cat CreateCat(string name)
@@ -50,6 +44,22 @@ namespace ITI.MicroZoo
         {
             _cats.TryGetValue(name, out Cat cat);
             return cat;
+        }
+
+        internal void OnRename(Cat cat, string newName)
+        {
+            if (_cats.ContainsKey(newName)) throw new ArgumentException("A cat with this name already exists.", nameof(newName));
+
+            _cats.Remove(cat.Name);
+            _cats.Add(newName, cat);
+        }
+
+        internal void OnRename(Bird bird, string newName)
+        {
+            if (_birds.ContainsKey(newName)) throw new ArgumentException("A bird with this name already exists.", nameof(newName));
+
+            _birds.Remove(bird.Name);
+            _birds.Add(newName, bird);
         }
     }
 }
