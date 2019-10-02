@@ -19,10 +19,12 @@ namespace ITI.MicroZoo.Tests
             Assert.That(c1.Name, Is.EqualTo("Cat-1"));
             Assert.That(c1, Is.SameAs(cat1));
             Assert.That(c1.Zoo, Is.SameAs(sut));
+            Assert.That(c1.IsAlive, Is.True);
 
             Assert.That(c2.Name, Is.EqualTo("Cat-2"));
             Assert.That(c2, Is.SameAs(cat2));
             Assert.That(c2.Zoo, Is.SameAs(sut));
+            Assert.That(c2.IsAlive, Is.True);
         }
 
         [Test]

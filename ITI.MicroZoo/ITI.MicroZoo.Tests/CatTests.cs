@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace ITI.MicroZoo.Tests
 {
@@ -28,10 +29,12 @@ namespace ITI.MicroZoo.Tests
 
             sut.Kill();
 
+            Assert.That(sut.IsAlive, Is.False);
             Assert.That(zoo.FindCat("name"), Is.Null);
             Cat c = zoo.CreateCat("name");
             Assert.That(c, Is.Not.SameAs(sut));
             Assert.That(sut.Zoo, Is.Null);
+            Assert.Throws<InvalidOperationException>(() => sut.Kill());
         }
     }
 }

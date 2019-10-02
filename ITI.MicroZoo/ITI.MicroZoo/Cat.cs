@@ -4,7 +4,7 @@ namespace ITI.MicroZoo
 {
     public class Cat
     {
-        readonly Zoo _context;
+        Zoo _context;
         string _name;
         double _x;
         double _y;
@@ -31,12 +31,20 @@ namespace ITI.MicroZoo
 
         public void Kill()
         {
-            throw new NotImplementedException();
+            if (!IsAlive) throw new InvalidOperationException("This cat is already dead.");
+
+            _context.OnKill(this);
+            _context = null;
         }
 
         public Zoo Zoo
         {
-            get { throw new NotImplementedException(); }
+            get { return _context; }
+        }
+
+        public bool IsAlive
+        {
+            get { return _context != null; }
         }
     }
 }
