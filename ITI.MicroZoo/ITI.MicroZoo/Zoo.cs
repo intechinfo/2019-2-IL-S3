@@ -7,11 +7,13 @@ namespace ITI.MicroZoo
     {
         readonly Dictionary<string, Bird> _birds;
         readonly Dictionary<string, Cat> _cats;
+        readonly Random _random;
 
         public Zoo()
         {
             _birds = new Dictionary<string, Bird>();
             _cats = new Dictionary<string, Cat>();
+            _random = new Random();
         }
 
         public Bird CreateBird(string name)
@@ -70,6 +72,16 @@ namespace ITI.MicroZoo
         internal void OnKill(Bird bird)
         {
             _birds.Remove(bird.Name);
+        }
+
+        internal Position GetRandomPosition()
+        {
+            return new Position(GetNextRandomDouble(-1.0, 1.0), GetNextRandomDouble(-1.0, 1.0));
+        }
+
+        internal double GetNextRandomDouble(double min, double max)
+        {
+            return _random.NextDouble() * (max - min) + min;
         }
     }
 }

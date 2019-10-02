@@ -6,8 +6,7 @@ namespace ITI.MicroZoo
     {
         Zoo _context;
         string _name;
-        double _x;
-        double _y;
+        Position _position;
         double _energy;
         int _age;
 
@@ -15,6 +14,7 @@ namespace ITI.MicroZoo
         {
             _context = context;
             _name = name;
+            _position = context.GetRandomPosition();
         }
 
         public string Name
@@ -45,6 +45,16 @@ namespace ITI.MicroZoo
         public bool IsAlive
         {
             get { return _context != null; }
+        }
+
+        public double X
+        {
+            get { return _position.X; }
+        }
+
+        public double Y
+        {
+            get { return _position.Y; }
         }
     }
 }
