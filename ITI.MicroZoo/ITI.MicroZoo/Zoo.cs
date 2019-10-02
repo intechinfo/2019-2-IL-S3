@@ -24,11 +24,6 @@ namespace ITI.MicroZoo
             return bird;
         }
 
-        internal void OnKill(Cat cat)
-        {
-            _cats.Remove(cat.Name);
-        }
-
         public Cat CreateCat(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("The name must be not null nor whitespace.", nameof(name));
@@ -65,6 +60,16 @@ namespace ITI.MicroZoo
 
             _birds.Remove(bird.Name);
             _birds.Add(newName, bird);
+        }
+
+        internal void OnKill(Cat cat)
+        {
+            _cats.Remove(cat.Name);
+        }
+
+        internal void OnKill(Bird bird)
+        {
+            _birds.Remove(bird.Name);
         }
     }
 }
