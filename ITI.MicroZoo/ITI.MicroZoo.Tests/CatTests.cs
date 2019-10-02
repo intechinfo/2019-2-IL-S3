@@ -19,5 +19,19 @@ namespace ITI.MicroZoo.Tests
             Assert.That(c2, Is.Null);
             Assert.That(sut.Name, Is.EqualTo("new-name"));
         }
+
+        [Test]
+        public void kill_cat()
+        {
+            Zoo zoo = new Zoo();
+            Cat sut = zoo.CreateCat("name");
+
+            sut.Kill();
+
+            Assert.That(zoo.FindCat("name"), Is.Null);
+            Cat c = zoo.CreateCat("name");
+            Assert.That(c, Is.Not.SameAs(sut));
+            Assert.That(sut.Zoo, Is.Null);
+        }
     }
 }
