@@ -80,9 +80,9 @@ namespace ITI.MicroZoo
             _birds.Remove(bird.Name);
         }
 
-        internal Position GetRandomPosition()
+        internal Vector GetRandomPosition()
         {
-            return new Position(GetNextRandomDouble(-1.0, 1.0), GetNextRandomDouble(-1.0, 1.0));
+            return new Vector(GetNextRandomDouble(-1.0, 1.0), GetNextRandomDouble(-1.0, 1.0));
         }
 
         internal double GetNextRandomDouble(double min, double max)

@@ -6,7 +6,7 @@ namespace ITI.MicroZoo
     {
         Zoo _context;
         string _name;
-        Position _position;
+        Vector _position;
         double _energy;
         int _age;
         bool _isFlying;
@@ -60,6 +60,11 @@ namespace ITI.MicroZoo
 
         internal void Update()
         {
+        }
+
+        internal Vector Position
+        {
+            get { return _position; }
         }
     }
 }

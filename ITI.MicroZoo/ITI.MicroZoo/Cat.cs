@@ -7,7 +7,7 @@ namespace ITI.MicroZoo
     {
         Zoo _context;
         string _name;
-        Position _position;
+        Vector _position;
         double _energy;
         int _age;
 
@@ -60,15 +60,35 @@ namespace ITI.MicroZoo
 
         internal void Update()
         {
-            //Bird[] birds = _context.Birds;
-            //double minDistance = double.MaxValue;
-            //foreach (Bird bird in birds)
-            //{
-            //    double distance = _position ?? bird.Position;
-            //    if (distance < minDistance) minDistance = distance;
-            //}
+            Bird[] birds = _context.Birds;
+            double minDistance = double.MaxValue;
+            Bird target = null;
+            foreach (Bird bird in birds)
+            {
+                double distance = Math.Sqrt(Math.Pow(X - bird.X, 2) + Math.Pow(Y - bird.Y, 2));
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    target = bird;
+                }
+            }
 
-            throw new NotImplementedException();
+            if (target != null)
+            {
+                if (minDistance < 0.15)
+                {
+                    _position = target.Position;
+                    target.Kill();
+                }
+                else
+                {
+
+                    Vector direction = target.Position.Sub(_position);
+                    direction = direction.Multiply(1 / direction.Magnitude);
+                    Vector move = direction.Multiply(0.15);
+                    _position = _position.Add(move);
+                }
+            }
         }
     }
 }
