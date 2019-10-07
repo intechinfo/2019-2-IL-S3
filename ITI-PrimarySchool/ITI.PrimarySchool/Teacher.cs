@@ -10,6 +10,7 @@ namespace ITI.PrimarySchool
     {
         readonly School _context;
         readonly string _name;
+        Classroom _assignment;
 
         internal Teacher(School context, string name)
         {
@@ -26,12 +27,16 @@ namespace ITI.PrimarySchool
         
         public Classroom Assignment
         {
-            get { throw new ArgumentException(); }
+            get { return _assignment; }
         }
 
         public void AssignTo( Classroom c )
         {
-            throw new ArgumentException();
+            if( c != null && _context != c.School ) throw new ArgumentException( "The teacher and the classroom doesn't belong to the same school.", nameof( c ) );
+            if( _assignment != null ) _assignment.OnAssignTo( null );
+
+            _assignment = c;
+            if( c != null ) c.OnAssignTo( this );
         }
     }
 }

@@ -9,10 +9,11 @@ namespace ITI.PrimarySchool
     public class Classroom
     {
         readonly School _context;
-        readonly string _name;
         readonly Dictionary<string, Pupil> _pupils;
+        string _name;
+        Teacher _teacher;
 
-        internal Classroom(School context, string name)
+        internal Classroom( School context, string name )
         {
             _context = context;
             _name = name;
@@ -22,16 +23,26 @@ namespace ITI.PrimarySchool
         public string Name
         {
             get { return _name; }
-            set { throw new NotImplementedException(); }
+            set
+            {
+                if( value == _name ) return;
+
+                _context.OnRename( this, value );
+                _name = value;
+            }
         }
 
+        internal void OnAssignTo( Teacher teacher )
+        {
+            _teacher = teacher;
+        }
 
         public Pupil AddPupil( string firstName, string lastName )
         {
             if( firstName == null || firstName.Length < 2 ) throw new ArgumentException( "The first name must be longer than 2 characters.", nameof( firstName ) );
             if( lastName == null || lastName.Length < 2 ) throw new ArgumentException( "The last name must be longer than 2 characters.", nameof( lastName ) );
 
-            string name = string.Format( "{0}#{1}", firstName, lastName );
+            string name = GetPupilName( firstName, lastName );
             if( _pupils.ContainsKey( name ) ) throw new ArgumentException( "A pupil with this first name and this last name already exists." );
 
             Pupil pupil = new Pupil( this, firstName, lastName );
@@ -41,15 +52,21 @@ namespace ITI.PrimarySchool
 
         public Pupil FindPupil( string firstName, string lastName )
         {
-            throw new NotImplementedException();
+            string name = GetPupilName( firstName, lastName );
+            _pupils.TryGetValue( name, out Pupil pupil );
+            return pupil;
         }
 
         public School School { get { return _context; } }
 
         public Teacher Teacher
         {
-            get { throw new NotImplementedException(); }
+            get { return _teacher; }
         }
 
+        string GetPupilName( string firstName, string lastName )
+        {
+            return string.Format( "{0}#{1}", firstName, lastName );
+        }
     }
 }

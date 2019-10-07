@@ -20,6 +20,13 @@ namespace ITI.PrimarySchool
             _teachers = new Dictionary<string, Teacher>();
         }
 
+        internal void OnRename( Classroom classroom, string newName )
+        {
+            if( _classrooms.ContainsKey( newName ) ) throw new ArgumentException( "A classroom with this name already exists.", nameof( newName ) );
+            _classrooms.Remove( classroom.Name );
+            _classrooms.Add( newName, classroom );
+        }
+
         public string Name { get { return _name; } }
 
         public Teacher AddTeacher( string name )
@@ -34,7 +41,8 @@ namespace ITI.PrimarySchool
         
         public Teacher FindTeacher( string name )
         {
-            throw new NotImplementedException();
+            _teachers.TryGetValue( name, out Teacher teacher );
+            return teacher;
         }
 
         public Classroom AddClassRoom( string name )
@@ -49,7 +57,8 @@ namespace ITI.PrimarySchool
 
         public Classroom FindClassRoom( string name )
         {
-            throw new NotImplementedException();
+            _classrooms.TryGetValue( name, out Classroom classroom );
+            return classroom;
         }
 
     }
