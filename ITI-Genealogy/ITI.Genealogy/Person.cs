@@ -12,13 +12,15 @@ namespace ITI.Genealogy
         readonly Person _father;
         readonly Person _mother;
 
-        internal Person( string firstName, string lastName, DateTime birthDate, bool isFemale, DateTime deathDate )
+        internal Person( string firstName, string lastName, DateTime birthDate, bool isFemale, DateTime deathDate, Person firstParent, Person secondParent )
         {
             _firstName = firstName;
             _lastName = lastName;
             _birthDate = birthDate;
             _isFemale = isFemale;
             _isDead = deathDate != DateTime.MinValue;
+            _father = firstParent;
+            _mother = secondParent;
         }
 
         public string FirstName

@@ -19,12 +19,12 @@ namespace ITI.Genealogy
             if( string.IsNullOrWhiteSpace( firstName ) ) throw new ArgumentException( "The first name must be not null nor whitespace.", nameof( firstName ) );
             if( string.IsNullOrWhiteSpace( lastName ) ) throw new ArgumentException( "The last name must be not null nor whitespace.", nameof( lastName ) );
 
-            return new Person( firstName, lastName, dateTime, isFemale, deathDate );
+            return new Person( firstName, lastName, dateTime, isFemale, deathDate, null, null );
         }
 
         public Person Breed( Person firstParent, Person secondParent, ChildOptions childOptions )
         {
-            throw new NotImplementedException();
+            return new Person( childOptions.FirstName, firstParent.LastName, childOptions.BirthDate, childOptions.IsFemale, DateTime.MinValue, firstParent, secondParent );
         }
 
         public void PassAway( Person person, DateTime dateTime )
