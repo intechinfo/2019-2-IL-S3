@@ -11,6 +11,7 @@ namespace ITI.Genealogy
         bool _isDead;
         readonly Person _father;
         readonly Person _mother;
+        readonly DateTime _deathDate;
 
         internal Person( string firstName, string lastName, DateTime birthDate, bool isFemale, DateTime deathDate, Person firstParent, Person secondParent )
         {
@@ -21,6 +22,7 @@ namespace ITI.Genealogy
             _isDead = deathDate != DateTime.MinValue;
             _father = firstParent;
             _mother = secondParent;
+            _deathDate = deathDate;
         }
 
         public string FirstName
@@ -60,7 +62,7 @@ namespace ITI.Genealogy
 
         public DateTime DeathDate
         {
-            get { throw new NotImplementedException(); }
+            get { return _deathDate; }
         }
     }
 }
