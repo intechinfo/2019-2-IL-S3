@@ -4,4 +4,8 @@
     <TargetFrameworks>netcoreapp2.2;net461</TargetFrameworks>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.3.2" />
+  </ItemGroup>
+
 </Project>

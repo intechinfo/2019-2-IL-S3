@@ -75,7 +75,7 @@ namespace ITI.MicroZoo
 
             if (target != null)
             {
-                if (minDistance < 0.15)
+                if (minDistance < _context.Options.CatSpeed)
                 {
                     _position = target.Position;
                     target.Kill();
@@ -85,7 +85,7 @@ namespace ITI.MicroZoo
 
                     Vector direction = target.Position.Sub(_position);
                     direction = direction.Multiply(1 / direction.Magnitude);
-                    Vector move = direction.Multiply(0.15);
+                    Vector move = direction.Multiply(_context.Options.CatSpeed);
                     _position = _position.Add(move);
                 }
             }
