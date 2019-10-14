@@ -5,19 +5,19 @@ namespace ITI.MicroZoo
 {
     public class Zoo
     {
-        readonly Dictionary<string, Bird> _birds;
-        readonly Dictionary<string, Cat> _cats;
+        readonly Dictionary<string, Animal> _animals;
         readonly Random _random;
         readonly ZooOptions _options;
         readonly IMailService _mailService;
+        readonly List<Animal> _deadAnimals;
 
         public Zoo()
         {
-            _birds = new Dictionary<string, Bird>();
-            _cats = new Dictionary<string, Cat>();
+            _animals = new Dictionary<string, Animal>();
             _random = new Random();
             _options = new ZooOptions();
             _mailService = new FileSystemMailService();
+            _deadAnimals = new List<Animal>();
         }
 
         internal IMailService MailService
@@ -28,65 +28,55 @@ namespace ITI.MicroZoo
         public Bird CreateBird(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("The name must be not null nor whitespace.", nameof(name));
-            if (_birds.ContainsKey(name)) throw new ArgumentException("A bird with this name already exists.", nameof(name));
+            if (_animals.ContainsKey(name)) throw new ArgumentException("A bird with this name already exists.", nameof(name));
 
             Bird bird = new Bird(this, name);
-            _birds.Add(name, bird);
+            _animals.Add(name, bird);
             return bird;
         }
 
         public Cat CreateCat(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("The name must be not null nor whitespace.", nameof(name));
-            if (_cats.ContainsKey(name)) throw new ArgumentException("A cat with this name already exists.", nameof(name));
+            if (_animals.ContainsKey(name)) throw new ArgumentException("A cat with this name already exists.", nameof(name));
 
             Cat cat = new Cat(this, name);
-            _cats.Add(name, cat);
+            _animals.Add(name, cat);
             return cat;
         }
 
         public Bird FindBird(string name)
         {
-            _birds.TryGetValue(name, out Bird bird);
+            _animals.TryGetValue(name, out Animal animal);
+            Bird bird = animal as Bird;
             return bird;
         }
 
         public Cat FindCat(string name)
         {
-            _cats.TryGetValue(name, out Cat cat);
+            _animals.TryGetValue(name, out Animal animal);
+            Cat cat = animal as Cat;
             return cat;
         }
 
         public void Update()
         {
-            foreach (Cat cat in _cats.Values) cat.Update();
-            foreach (Bird bird in _birds.Values) bird.Update();
+            _deadAnimals.Clear();
+            foreach (Animal animal in _animals.Values) animal.Update();
+            foreach (Animal animal in _deadAnimals) _animals.Remove(animal.Name);
         }
 
-        internal void OnRename(Cat cat, string newName)
+        internal void OnRename(Animal animal, string newName)
         {
-            if (_cats.ContainsKey(newName)) throw new ArgumentException("A cat with this name already exists.", nameof(newName));
+            if (_animals.ContainsKey(newName)) throw new ArgumentException("An animal with this name already exists.", nameof(newName));
 
-            _cats.Remove(cat.Name);
-            _cats.Add(newName, cat);
+            _animals.Remove(animal.Name);
+            _animals.Add(newName, animal);
         }
 
-        internal void OnRename(Bird bird, string newName)
+        internal void OnKill(Animal animal)
         {
-            if (_birds.ContainsKey(newName)) throw new ArgumentException("A bird with this name already exists.", nameof(newName));
-
-            _birds.Remove(bird.Name);
-            _birds.Add(newName, bird);
-        }
-
-        internal void OnKill(Cat cat)
-        {
-            _cats.Remove(cat.Name);
-        }
-
-        internal void OnKill(Bird bird)
-        {
-            _birds.Remove(bird.Name);
+            _deadAnimals.Add(animal);
         }
 
         internal Vector GetRandomPosition()
@@ -99,16 +89,16 @@ namespace ITI.MicroZoo
             return _random.NextDouble() * (max - min) + min;
         }
 
-        internal Bird[] Birds
+        internal List<Bird> Birds
         {
             get
             {
-                Bird[] birds = new Bird[_birds.Count];
-                int i = 0;
-                foreach (Bird bird in _birds.Values)
+
+                List<Bird> birds = new List<Bird>();
+                foreach (Animal animal in _animals.Values)
                 {
-                    birds[i] = bird;
-                    i++;
+                    Bird bird = animal as Bird;
+                    if (bird != null) birds.Add(bird);
                 }
 
                 return birds;

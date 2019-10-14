@@ -3,64 +3,24 @@ using System.Collections.Generic;
 
 namespace ITI.MicroZoo
 {
-    public class Cat
+    public class Cat : Animal
     {
-        Zoo _context;
-        string _name;
-        Vector _position;
-        double _energy;
-        int _age;
-
         internal Cat(Zoo context, string name)
+            : base(context, name)
         {
-            _context = context;
-            _name = name;
-            _position = context.GetRandomPosition();
-        }
-
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("The name must be not null nor whitespace.", nameof(value));
-
-                _context.OnRename(this, value);
-                _name = value;
-            }
         }
 
         public void Kill()
         {
             if (!IsAlive) throw new InvalidOperationException("This cat is already dead.");
 
-            _context.OnKill(this);
-            _context = null;
+            Zoo.OnKill(this);
+            Zoo = null;
         }
 
-        public Zoo Zoo
+        internal override void Update()
         {
-            get { return _context; }
-        }
-
-        public bool IsAlive
-        {
-            get { return _context != null; }
-        }
-
-        public double X
-        {
-            get { return _position.X; }
-        }
-
-        public double Y
-        {
-            get { return _position.Y; }
-        }
-
-        internal void Update()
-        {
-            Bird[] birds = _context.Birds;
+            List<Bird> birds = Zoo.Birds;
             double minDistance = double.MaxValue;
             Bird target = null;
             foreach (Bird bird in birds)
@@ -75,18 +35,18 @@ namespace ITI.MicroZoo
 
             if (target != null)
             {
-                if (minDistance < _context.Options.CatSpeed)
+                if (minDistance < Zoo.Options.CatSpeed)
                 {
-                    _position = target.Position;
+                    Position = target.Position;
                     target.Kill();
                 }
                 else
                 {
 
-                    Vector direction = target.Position.Sub(_position);
+                    Vector direction = target.Position.Sub(Position);
                     direction = direction.Multiply(1 / direction.Magnitude);
-                    Vector move = direction.Multiply(_context.Options.CatSpeed);
-                    _position = _position.Add(move);
+                    Vector move = direction.Multiply(Zoo.Options.CatSpeed);
+                    Position = Position.Add(move);
                 }
             }
         }
