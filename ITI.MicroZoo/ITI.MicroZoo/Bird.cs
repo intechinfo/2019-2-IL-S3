@@ -44,7 +44,7 @@ namespace ITI.MicroZoo
         {
             if (!IsAlive) throw new InvalidOperationException("This bird is already dead.");
 
-            MailService mailService = new MailService();
+            IMailService mailService = _context.MailService;
             mailService.SendMail(
                 "antoine.raquillet@esiea.fr",
                 "A bird is dying.",

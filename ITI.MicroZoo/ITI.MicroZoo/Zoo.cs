@@ -9,6 +9,7 @@ namespace ITI.MicroZoo
         readonly Dictionary<string, Cat> _cats;
         readonly Random _random;
         readonly ZooOptions _options;
+        readonly IMailService _mailService;
 
         public Zoo()
         {
@@ -16,6 +17,12 @@ namespace ITI.MicroZoo
             _cats = new Dictionary<string, Cat>();
             _random = new Random();
             _options = new ZooOptions();
+            _mailService = new FileSystemMailService();
+        }
+
+        internal IMailService MailService
+        {
+            get { return _mailService; }
         }
 
         public Bird CreateBird(string name)

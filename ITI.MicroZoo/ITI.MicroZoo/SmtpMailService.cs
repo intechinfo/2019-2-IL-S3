@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MailKit.Net.Smtp;
+﻿using MailKit.Net.Smtp;
 using MimeKit;
 
 namespace ITI.MicroZoo
 {
-    public class MailService
+    public class SmtpMailService : IMailService
     {
         public void SendMail(string to, string subject, string body)
         {
