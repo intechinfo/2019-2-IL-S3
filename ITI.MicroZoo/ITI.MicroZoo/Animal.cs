@@ -11,7 +11,7 @@ namespace ITI.MicroZoo
         int _age;
         double _direction;
 
-        internal Animal(Zoo context, string name)
+        protected Animal(Zoo context, string name)
         {
             _context = context;
             _name = name;
@@ -21,6 +21,14 @@ namespace ITI.MicroZoo
         }
 
         internal abstract void Update();
+
+        public virtual void Kill()
+        {
+            if (!IsAlive) throw new InvalidOperationException("This animal is already dead.");
+
+            _context.OnKill(this);
+            _context = null;
+        }
 
         public string Name
         {

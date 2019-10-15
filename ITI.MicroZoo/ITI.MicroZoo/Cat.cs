@@ -10,14 +10,6 @@ namespace ITI.MicroZoo
         {
         }
 
-        public void Kill()
-        {
-            if (!IsAlive) throw new InvalidOperationException("This cat is already dead.");
-
-            Zoo.OnKill(this);
-            Zoo = null;
-        }
-
         internal override void Update()
         {
             List<Bird> birds = Zoo.Birds;

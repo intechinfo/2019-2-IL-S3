@@ -13,7 +13,7 @@ namespace ITI.MicroZoo
         {
         }
 
-        public void Kill()
+        public override void Kill()
         {
             if (!IsAlive) throw new InvalidOperationException("This bird is already dead.");
 
@@ -23,8 +23,7 @@ namespace ITI.MicroZoo
                 "A bird is dying.",
                 string.Format("{0} is dying.", Name));
 
-            Zoo.OnKill(this);
-            Zoo = null;
+            base.Kill();
         }
 
         internal override void Update()

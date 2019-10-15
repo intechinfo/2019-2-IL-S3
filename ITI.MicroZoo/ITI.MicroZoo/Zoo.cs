@@ -10,6 +10,7 @@ namespace ITI.MicroZoo
         readonly ZooOptions _options;
         readonly IMailService _mailService;
         readonly List<Animal> _deadAnimals;
+        bool _isUpdating;
 
         public Zoo()
         {
@@ -61,9 +62,11 @@ namespace ITI.MicroZoo
 
         public void Update()
         {
+            _isUpdating = true;
             _deadAnimals.Clear();
             foreach (Animal animal in _animals.Values) animal.Update();
             foreach (Animal animal in _deadAnimals) _animals.Remove(animal.Name);
+            _isUpdating = false;
         }
 
         internal void OnRename(Animal animal, string newName)
@@ -76,7 +79,8 @@ namespace ITI.MicroZoo
 
         internal void OnKill(Animal animal)
         {
-            _deadAnimals.Add(animal);
+            if (_isUpdating) _deadAnimals.Add(animal);
+            else _animals.Remove(animal.Name);
         }
 
         internal Vector GetRandomPosition()

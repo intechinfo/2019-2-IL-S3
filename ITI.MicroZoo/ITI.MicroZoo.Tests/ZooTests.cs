@@ -62,11 +62,11 @@ namespace ITI.MicroZoo.Tests
         public void create_2_animals_with_same_name_throws_ArgumentException()
         {
             Zoo sut = new Zoo();
-            sut.CreateBird("name");
-            sut.CreateCat("name");
+            sut.CreateBird("name1");
+            sut.CreateCat("name2");
 
-            Assert.Throws<ArgumentException>(() => sut.CreateBird("name"));
-            Assert.Throws<ArgumentException>(() => sut.CreateCat("name"));
+            Assert.Throws<ArgumentException>(() => sut.CreateBird("name1"));
+            Assert.Throws<ArgumentException>(() => sut.CreateCat("name2"));
         }
 
         [Test]
