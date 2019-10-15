@@ -28,23 +28,29 @@ namespace ITI.MicroZoo
 
         public Bird CreateBird(string name)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("The name must be not null nor whitespace.", nameof(name));
-            if (_animals.ContainsKey(name)) throw new ArgumentException("A bird with this name already exists.", nameof(name));
-
-            Bird bird = new Bird(this, name);
-            _animals.Add(name, bird);
-            return bird;
+            return CreateAnimal<Bird>(name, new BirdFactory());
         }
 
         public Cat CreateCat(string name)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("The name must be not null nor whitespace.", nameof(name));
-            if (_animals.ContainsKey(name)) throw new ArgumentException("A cat with this name already exists.", nameof(name));
-
-            Cat cat = new Cat(this, name);
-            _animals.Add(name, cat);
-            return cat;
+            return CreateAnimal<Cat>(name, new CatFactory());
         }
+
+        public Dog CreateDog(string name)
+        {
+            return CreateAnimal<Dog>(name, new DogFactory());
+        }
+
+        T CreateAnimal<T>(string name, IAnimalFactory<T> animalFactory) where T : Animal
+        {
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("The name must be not null nor whitespace.", nameof(name));
+            if (_animals.ContainsKey(name)) throw new ArgumentException("An animal with this name already exists.", nameof(name));
+
+            T animal = animalFactory.Create(this, name);
+            _animals.Add(name, animal);
+            return animal;
+        }
+
 
         public Bird FindBird(string name)
         {
