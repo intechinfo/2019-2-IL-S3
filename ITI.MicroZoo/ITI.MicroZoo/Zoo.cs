@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ITI.MicroZoo
 {
@@ -103,15 +104,10 @@ namespace ITI.MicroZoo
         {
             get
             {
-
-                List<Bird> birds = new List<Bird>();
-                foreach (Animal animal in _animals.Values)
-                {
-                    Bird bird = animal as Bird;
-                    if (bird != null) birds.Add(bird);
-                }
-
-                return birds;
+                return _animals.Values
+                               .Select(a => a as Bird)
+                               .Where(a => a != null)
+                               .ToList();
             }
         }
 
