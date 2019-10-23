@@ -28,57 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.inputTextBox = new System.Windows.Forms.TextBox();
-            this.okButton = new System.Windows.Forms.Button();
-            this.outputLabel = new System.Windows.Forms.Label();
+            this.createTaskControl1 = new WindowFormsDemo.CreateTaskControl();
+            this.taskListControl1 = new WindowFormsDemo.TaskListControl();
             this.SuspendLayout();
             // 
-            // inputTextBox
+            // createTaskControl1
             // 
-            this.inputTextBox.Location = new System.Drawing.Point(12, 17);
-            this.inputTextBox.Name = "inputTextBox";
-            this.inputTextBox.Size = new System.Drawing.Size(242, 26);
-            this.inputTextBox.TabIndex = 0;
+            this.createTaskControl1.Location = new System.Drawing.Point(13, 13);
+            this.createTaskControl1.Name = "createTaskControl1";
+            this.createTaskControl1.Size = new System.Drawing.Size(289, 161);
+            this.createTaskControl1.TabIndex = 0;
+            this.createTaskControl1.TaskCreated += new System.EventHandler(this.onTaskCreated);
             // 
-            // okButton
+            // taskListControl1
             // 
-            this.okButton.Location = new System.Drawing.Point(261, 13);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(108, 35);
-            this.okButton.TabIndex = 1;
-            this.okButton.Text = "O.k.";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_onClicked);
-            // 
-            // outputLabel
-            // 
-            this.outputLabel.AutoSize = true;
-            this.outputLabel.Location = new System.Drawing.Point(12, 58);
-            this.outputLabel.Name = "outputLabel";
-            this.outputLabel.Size = new System.Drawing.Size(0, 20);
-            this.outputLabel.TabIndex = 2;
+            this.taskListControl1.Location = new System.Drawing.Point(13, 190);
+            this.taskListControl1.Name = "taskListControl1";
+            this.taskListControl1.Size = new System.Drawing.Size(75, 23);
+            this.taskListControl1.TabIndex = 1;
+            this.taskListControl1.Text = "taskListControl1";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 119);
-            this.Controls.Add(this.outputLabel);
-            this.Controls.Add(this.okButton);
-            this.Controls.Add(this.inputTextBox);
+            this.ClientSize = new System.Drawing.Size(779, 657);
+            this.Controls.Add(this.taskListControl1);
+            this.Controls.Add(this.createTaskControl1);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Demo";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox inputTextBox;
-        private System.Windows.Forms.Button okButton;
-        private System.Windows.Forms.Label outputLabel;
+        private CreateTaskControl createTaskControl1;
+        private TaskListControl taskListControl1;
     }
 }
 
