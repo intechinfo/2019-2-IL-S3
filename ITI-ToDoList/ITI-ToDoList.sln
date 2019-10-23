@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowFormsDemo", "WindowFormsDemo\WindowFormsDemo.csproj", "{316E460A-6138-4DBA-BBD3-745D32F536E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.ToDoList.GUI", "ITI.ToDoList.GUI\ITI.ToDoList.GUI.csproj", "{316E460A-6138-4DBA-BBD3-745D32F536E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.ToDoList.Model", "ITI.ToDoList.Model\ITI.ToDoList.Model.csproj", "{048CC6A1-B512-41C1-BF07-DC02C62405F9}"
 EndProject

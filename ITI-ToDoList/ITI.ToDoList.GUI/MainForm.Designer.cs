@@ -1,4 +1,4 @@
-﻿namespace WindowFormsDemo
+﻿namespace ITI.ToDoList.GUI
 {
     partial class MainForm
     {
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.createTaskControl1 = new WindowFormsDemo.CreateTaskControl();
-            this.taskListControl1 = new WindowFormsDemo.TaskListControl();
+            this.createTaskControl1 = new CreateTaskControl();
+            this.taskListControl1 = new TaskListControl();
             this.SuspendLayout();
             // 
             // createTaskControl1

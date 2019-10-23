@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowFormsDemo.Properties
+namespace ITI.ToDoList.GUI.Properties
 {
 
 

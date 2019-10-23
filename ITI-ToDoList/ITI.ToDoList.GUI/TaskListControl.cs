@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace WindowFormsDemo
+namespace ITI.ToDoList.GUI
 {
     public class TaskListControl : Control
     {

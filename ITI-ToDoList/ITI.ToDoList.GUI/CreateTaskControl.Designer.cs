@@ -1,4 +1,4 @@
-﻿namespace WindowFormsDemo
+﻿namespace ITI.ToDoList.GUI
 {
     partial class CreateTaskControl
     {

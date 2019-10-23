@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{316E460A-6138-4DBA-BBD3-745D32F536E2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WindowFormsDemo</RootNamespace>
-    <AssemblyName>WindowFormsDemo</AssemblyName>
+    <RootNamespace>ITI.ToDoList.GUI</RootNamespace>
+    <AssemblyName>ITI.ToDoList.GUI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

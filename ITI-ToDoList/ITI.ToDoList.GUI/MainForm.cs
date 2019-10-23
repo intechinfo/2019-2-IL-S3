@@ -1,23 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ITI.ToDoList.Model;
 
-namespace WindowFormsDemo
+namespace ITI.ToDoList.GUI
 {
     public partial class MainForm : Form
     {
-        readonly ToDoList _model;
+        readonly Model.ToDoList _model;
 
         public MainForm()
         {
-            _model = new ToDoList();
+            _model = new Model.ToDoList();
             InitializeComponent();
         }
 
