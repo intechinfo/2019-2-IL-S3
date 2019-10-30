@@ -1,4 +1,4 @@
-﻿using System;
+﻿using ITI.SFMLExample.Model;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
@@ -11,6 +11,7 @@ namespace ITI.SFMLExample.GUI
         {
             using (RenderWindow window = new RenderWindow(new VideoMode(800, 600), "Example", Styles.Close | Styles.Titlebar))
             {
+                GameController gameController = new GameController(window, new GameContext());
                 window.Closed += (s, e) =>
                 {
                     window.Close();
@@ -24,15 +25,9 @@ namespace ITI.SFMLExample.GUI
                 while (window.IsOpen)
                 {
                     window.DispatchEvents();
-
+                    gameController.Update();
                     window.Clear();
-
-                    RectangleShape rectangleShape = new RectangleShape(new Vector2f(30, 50));
-                    rectangleShape.FillColor = Color.Red;
-                    rectangleShape.Position = new Vector2f(400, 300);
-
-                    rectangleShape.Draw(window, RenderStates.Default);
-
+                    gameController.Display();
                     window.Display();
                 }
             }

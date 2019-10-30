@@ -13,5 +13,10 @@
         {
             get { return _player; }
         }
+
+        public void Update()
+        {
+            _player.Update();
+        }
     }
 }
