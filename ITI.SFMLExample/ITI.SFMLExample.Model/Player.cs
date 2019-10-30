@@ -8,7 +8,8 @@ namespace ITI.SFMLExample.Model
         double _energy;
         float _x;
         float _y;
-        bool _hasMoved;
+        float _deltaX;
+        float _deltaY;
 
         internal Player(GameContext ctx)
         {
@@ -33,21 +34,30 @@ namespace ITI.SFMLExample.Model
             get { return _y; }
         }
 
-        public void Move(float deltaX, float deltaY)
+        public void StartMove(float deltaX, float deltaY)
         {
-            if (_energy > 0.1)
-            {
-                _x += deltaX;
-                _y += deltaY;
-                _energy -= 0.2;
-                _hasMoved = true;
-            }
+            _deltaX = deltaX;
+            _deltaY = deltaY;
+        }
+
+        public void StopMove()
+        {
+            _deltaX = 0.0f;
+            _deltaY = 0.0f;
         }
 
         public void Update()
         {
-            if(!_hasMoved) _energy = Math.Min(1.0, _energy + 0.05);
-            _hasMoved = false;
+            if(_energy > 0.2 && (_deltaX != 0.0f || _deltaY != 0.0f))
+            {
+                _x = Math.Max(Math.Min(_x + _deltaX, 1.0f), -1.0f);
+                _y = Math.Max(Math.Min(_y + _deltaY, 1.0f), -1.0f);
+                _energy -= 0.1;
+            }
+            else if(_energy <= 0.2 || (_deltaX == 0.0f && _deltaY == 0.0f))
+            {
+                _energy += 0.05f;
+            }
         }
     }
 }
