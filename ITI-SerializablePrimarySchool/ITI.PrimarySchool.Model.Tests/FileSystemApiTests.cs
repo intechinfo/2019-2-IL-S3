@@ -10,13 +10,14 @@ namespace ITI.PrimarySchool.Model.Tests
         [Test]
         public void write_and_read_from_file()
         {
-            using (FileStream stream = File.OpenWrite("test.txt"))
+            string path = Path.GetTempFileName();
+            using (FileStream stream = File.OpenWrite(path))
             using (StreamWriter writer = new StreamWriter(stream, Encoding.Unicode))
             {
                 for (int i = 0; i < 100; i++) writer.WriteLine(i);
             }
 
-            using (FileStream stream = File.OpenRead("test.txt"))
+            using (FileStream stream = File.OpenRead(path))
             using (StreamReader reader = new StreamReader(stream, Encoding.Unicode))
             {
                 for (int i = 0; i < 100; i++)
@@ -31,13 +32,14 @@ namespace ITI.PrimarySchool.Model.Tests
         [Test]
         public void read_and_write_with_BinaryReader_and_BinaryWriter()
         {
-            using (FileStream stream = File.OpenWrite("test.bin"))
+            string path = Path.GetTempFileName();
+            using (FileStream stream = File.OpenWrite(path))
             using (BinaryWriter writer = new BinaryWriter(stream, Encoding.Unicode))
             {
                 for (int i = 0; i < 100; i++) writer.Write(i);
             }
 
-            using(FileStream stream = File.OpenRead("test.bin"))
+            using(FileStream stream = File.OpenRead(path))
             using(BinaryReader reader = new BinaryReader(stream, Encoding.Unicode))
             {
                 for(int i = 0; i < 100; i++)
