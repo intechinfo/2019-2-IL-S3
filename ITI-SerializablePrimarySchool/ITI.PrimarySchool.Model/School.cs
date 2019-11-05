@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Newtonsoft.Json.Linq;
 
 namespace ITI.PrimarySchool.Model
 {
@@ -75,6 +77,14 @@ namespace ITI.PrimarySchool.Model
         {
             _students.TryGetValue(lastName, out Student student);
             return student;
+        }
+
+        public JToken Save()
+        {
+            return new JObject(
+                new JProperty("name", _name),
+                new JProperty("classrooms", _classrooms.Values.Select(c => c.Save())),
+                new JProperty("students", _students.Values.Select(s => s.Save())));
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System.IO;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace ITI.PrimarySchool.Model.Tests
@@ -72,6 +74,25 @@ namespace ITI.PrimarySchool.Model.Tests
                 Assert.That(s4.FirstName, Is.EqualTo("firstName-4"));
                 Assert.That(s4.LastName, Is.EqualTo("lastName-4"));
             }
+        }
+
+        [Test]
+        public void json_serialization()
+        {
+            School sut = new School("in'tech");
+            Classroom c = sut.FindOrCreate("classroom-1");
+            c.MaxStudentCount = 10;
+            c = sut.FindOrCreate("classroom-2");
+            c.MaxStudentCount = 20;
+            c = sut.FindOrCreate("classroom-3");
+            c.MaxStudentCount = 30;
+            sut.CreateStudent("firstName-1", "lastName-1");
+            sut.CreateStudent("firstName-2", "lastName-2");
+            sut.CreateStudent("firstName-3", "lastName-3");
+            sut.CreateStudent("firstName-4", "lastName-4");
+
+            JToken json = sut.Save();
+            System.Console.WriteLine(json);
         }
     }
 }

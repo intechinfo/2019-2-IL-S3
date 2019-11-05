@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace ITI.PrimarySchool.Model
 {
@@ -41,6 +42,13 @@ namespace ITI.PrimarySchool.Model
         {
             writer.Write(_lastName);
             writer.Write(_firstName);
+        }
+
+        internal JToken Save()
+        {
+            return new JObject(
+                new JProperty("firstName", _firstName),
+                new JProperty("lastName", _lastName));
         }
     }
 }
