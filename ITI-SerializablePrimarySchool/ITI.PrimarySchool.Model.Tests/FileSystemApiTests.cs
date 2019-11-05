@@ -27,5 +27,25 @@ namespace ITI.PrimarySchool.Model.Tests
                 }
             }
         }
+
+        [Test]
+        public void read_and_write_with_BinaryReader_and_BinaryWriter()
+        {
+            using (FileStream stream = File.OpenWrite("test.bin"))
+            using (BinaryWriter writer = new BinaryWriter(stream, Encoding.Unicode))
+            {
+                for (int i = 0; i < 100; i++) writer.Write(i);
+            }
+
+            using(FileStream stream = File.OpenRead("test.bin"))
+            using(BinaryReader reader = new BinaryReader(stream, Encoding.Unicode))
+            {
+                for(int i = 0; i < 100; i++)
+                {
+                    int n = reader.ReadInt32();
+                    Assert.That(n, Is.EqualTo(i));
+                }
+            }
+        }
     }
 }
