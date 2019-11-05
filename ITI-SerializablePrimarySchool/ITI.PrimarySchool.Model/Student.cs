@@ -1,4 +1,6 @@
-﻿namespace ITI.PrimarySchool.Model
+﻿using System.IO;
+
+namespace ITI.PrimarySchool.Model
 {
     public class Student
     {
@@ -11,6 +13,13 @@
             _ctx = ctx;
             _firstName = firstName;
             _lastName = lastName;
+        }
+
+        internal Student(School ctx, BinaryReader reader)
+        {
+            _ctx = ctx;
+            _lastName = reader.ReadString();
+            _firstName = reader.ReadString();
         }
 
         public School School
@@ -26,6 +35,12 @@
         public string LastName
         {
             get { return _lastName; }
+        }
+
+        internal void Save(BinaryWriter writer)
+        {
+            writer.Write(_lastName);
+            writer.Write(_firstName);
         }
     }
 }

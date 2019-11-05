@@ -28,6 +28,13 @@ namespace ITI.PrimarySchool.Model
                 Classroom c = new Classroom(this, reader);
                 _classrooms.Add(c.Name, c);
             }
+
+            int studentCount = reader.ReadInt32();
+            for(int i = 0; i < studentCount; i++)
+            {
+                Student s = new Student(this, reader);
+                _students.Add(s.LastName, s);
+            }
         }
 
         public string Name
@@ -40,6 +47,9 @@ namespace ITI.PrimarySchool.Model
             writer.Write(_name);
             writer.Write(_classrooms.Count);
             foreach (Classroom c in _classrooms.Values) c.Save(writer);
+
+            writer.Write(_students.Count);
+            foreach (Student s in _students.Values) s.Save(writer); 
         }
 
         public Classroom FindOrCreate(string name)
