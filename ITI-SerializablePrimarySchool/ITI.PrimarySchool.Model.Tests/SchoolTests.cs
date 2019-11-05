@@ -17,17 +17,20 @@ namespace ITI.PrimarySchool.Model.Tests
             c.MaxStudentCount = 20;
             c = sut.FindOrCreate("classroom-3");
             c.MaxStudentCount = 30;
+            sut.CreateStudent("firstName-1", "lastName-1");
+            sut.CreateStudent("firstName-2", "lastName-2");
+            sut.CreateStudent("firstName-3", "lastName-3");
+            sut.CreateStudent("firstName-4", "lastName-4");
 
             string path = Path.GetTempFileName();
-            System.Console.WriteLine(path);
             using (FileStream stream = File.OpenWrite(path))
-            using(BinaryWriter writer = new BinaryWriter(stream, Encoding.Unicode))
+            using (BinaryWriter writer = new BinaryWriter(stream, Encoding.Unicode))
             {
                 sut.Save(writer);
             }
 
-            using(FileStream stream = File.OpenRead(path))
-            using(BinaryReader reader = new BinaryReader(stream, Encoding.Unicode))
+            using (FileStream stream = File.OpenRead(path))
+            using (BinaryReader reader = new BinaryReader(stream, Encoding.Unicode))
             {
                 School school = new School(reader);
 
@@ -48,6 +51,26 @@ namespace ITI.PrimarySchool.Model.Tests
                 Assert.That(c3.School, Is.SameAs(school));
                 Assert.That(c3.Name, Is.EqualTo("classroom-3"));
                 Assert.That(c3.MaxStudentCount, Is.EqualTo(30));
+
+                Student s1 = school.FindStudent("lastName-1");
+                Assert.That(s1.School, Is.EqualTo(school));
+                Assert.That(s1.FirstName, Is.EqualTo("firstName-1"));
+                Assert.That(s1.LastName, Is.EqualTo("lastName-1"));
+
+                Student s2 = school.FindStudent("lastName-2");
+                Assert.That(s2.School, Is.EqualTo(school));
+                Assert.That(s2.FirstName, Is.EqualTo("firstName-2"));
+                Assert.That(s2.LastName, Is.EqualTo("lastName-2"));
+
+                Student s3 = school.FindStudent("lastName-3");
+                Assert.That(s3.School, Is.EqualTo(school));
+                Assert.That(s3.FirstName, Is.EqualTo("firstName-3"));
+                Assert.That(s3.LastName, Is.EqualTo("lastName-3"));
+
+                Student s4 = school.FindStudent("lastName-4");
+                Assert.That(s4.School, Is.EqualTo(school));
+                Assert.That(s4.FirstName, Is.EqualTo("firstName-4"));
+                Assert.That(s4.LastName, Is.EqualTo("lastName-4"));
             }
         }
     }

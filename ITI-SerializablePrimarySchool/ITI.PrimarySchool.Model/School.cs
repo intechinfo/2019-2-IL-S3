@@ -7,16 +7,19 @@ namespace ITI.PrimarySchool.Model
     {
         readonly string _name;
         readonly Dictionary<string, Classroom> _classrooms;
+        readonly Dictionary<string, Student> _students;
 
         public School(string name)
         {
             _name = name;
             _classrooms = new Dictionary<string, Classroom>();
+            _students = new Dictionary<string, Student>();
         }
 
         public School(BinaryReader reader)
         {
             _classrooms = new Dictionary<string, Classroom>();
+            _students = new Dictionary<string, Student>();
 
             _name = reader.ReadString();
             int classroomCount = reader.ReadInt32();
@@ -49,6 +52,19 @@ namespace ITI.PrimarySchool.Model
             }
 
             return classroom;
+        }
+
+        public Student CreateStudent(string firstName, string lastName)
+        {
+            Student student = new Student(this, firstName, lastName);
+            _students.Add(lastName, student);
+            return student;
+        }
+
+        public Student FindStudent(string lastName)
+        {
+            _students.TryGetValue(lastName, out Student student);
+            return student;
         }
     }
 }
