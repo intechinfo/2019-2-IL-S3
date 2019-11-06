@@ -23,6 +23,13 @@ namespace ITI.PrimarySchool.Model
             _maxStudentCount = reader.ReadInt32();
         }
 
+        internal Classroom(School ctx, JToken json)
+        {
+            _ctx = ctx;
+            _name = json.Value<string>("name");
+            _maxStudentCount = json.Value<int>("maxStudentCount");
+        }
+
         public School School
         {
             get { return _ctx; }

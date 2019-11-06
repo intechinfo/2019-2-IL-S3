@@ -39,6 +39,22 @@ namespace ITI.PrimarySchool.Model
             }
         }
 
+        public School(JToken json)
+        {
+            _classrooms = new Dictionary<string, Classroom>();
+            _students = new Dictionary<string, Student>();
+
+            _name = json.Value<string>("name");
+
+            JToken jClassrooms = json["classrooms"];
+            IEnumerable<Classroom> classrooms = jClassrooms.Select(item => new Classroom(this, item));
+            foreach (Classroom c in classrooms) _classrooms.Add(c.Name, c);
+
+            JToken jStudents = json["students"];
+            IEnumerable<Student> students = jStudents.Select(item => new Student(this, item));
+            foreach (Student s in students) _students.Add(s.LastName, s);
+        }
+
         public string Name
         {
             get { return _name; }
@@ -79,7 +95,7 @@ namespace ITI.PrimarySchool.Model
             return student;
         }
 
-        public JToken Save()
+        public JToken ToJson()
         {
             return new JObject(
                 new JProperty("name", _name),

@@ -23,6 +23,13 @@ namespace ITI.PrimarySchool.Model
             _firstName = reader.ReadString();
         }
 
+        internal Student(School ctx, JToken json)
+        {
+            _ctx = ctx;
+            _firstName = json.Value<string>("firstName");
+            _lastName = json.Value<string>("lastName");
+        }
+
         public School School
         {
             get { return _ctx; }
